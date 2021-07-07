@@ -282,6 +282,7 @@
   {:error-function (make-word-stats-error-function-from-cases (first word-stats-train-and-test-cases)
                                                               (second word-stats-train-and-test-cases))
    :training-cases (first word-stats-train-and-test-cases)
+   :test-cases (second word-stats-train-and-test-cases)
    :atom-generators word-stats-atom-generators
    :max-points 3200
    :max-genome-size-in-initial-program 400

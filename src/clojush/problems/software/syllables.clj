@@ -167,6 +167,7 @@
   {:error-function (make-syllables-error-function-from-cases (first syllables-train-and-test-cases)
                                                              (second syllables-train-and-test-cases))
    :training-cases (first syllables-train-and-test-cases)
+   :test-cases (second syllables-train-and-test-cases)
    :sub-training-cases '()
    :atom-generators syllables-atom-generators
    :max-points 3200

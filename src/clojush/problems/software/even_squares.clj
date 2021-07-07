@@ -158,6 +158,7 @@
   {:error-function (make-even-squares-error-function-from-cases (first even-squares-train-and-test-cases)
                                                                 (second even-squares-train-and-test-cases))
    :training-cases (first even-squares-train-and-test-cases)
+   :test-cases (second even-squares-train-and-test-cases)
    :atom-generators even-squares-atom-generators
    :max-points 1600
    :max-genome-size-in-initial-program 200

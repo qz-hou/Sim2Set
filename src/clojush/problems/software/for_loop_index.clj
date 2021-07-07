@@ -150,6 +150,7 @@
   {:error-function (make-for-loop-index-error-function-from-cases (first for-loop-index-train-and-test-cases)
                                                                   (second for-loop-index-train-and-test-cases))
    :training-cases (first for-loop-index-train-and-test-cases)
+   :test-cases (second for-loop-index-train-and-test-cases)
    :sub-training-cases '()
    :atom-generators loop-atom-generators
    :max-points 1200

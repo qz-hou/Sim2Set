@@ -136,6 +136,7 @@
   {:error-function (make-small-or-large-error-function-from-cases (first small-or-large-train-and-test-cases)
                                                                   (second small-or-large-train-and-test-cases))
    :training-cases (first small-or-large-train-and-test-cases)
+   :test-cases (second small-or-large-train-and-test-cases)
    :sub-training-cases '()
    :atom-generators small-or-large-atom-generators
    :max-points 800
@@ -147,8 +148,7 @@
    :genetic-operator-probabilities {:alternation 0.2
                                     :uniform-mutation 0.2
                                     :uniform-close-mutation 0.1
-                                    [:alternation :uniform-mutation] 0.5
-                                    }
+                                    [:alternation :uniform-mutation] 0.5}
    :alternation-rate 0.01
    :alignment-deviation 5
    :uniform-mutation-rate 0.01
@@ -156,5 +156,4 @@
    :problem-specific-initial-report small-or-large-initial-report
    :report-simplifications 0
    :final-report-simplifications 5000
-   :max-error 5000
-   })
+   :max-error 5000})

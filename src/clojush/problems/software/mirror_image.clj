@@ -184,6 +184,7 @@
 (def argmap
   {:error-function mirror-image-error-function
    :training-cases (first mirror-image-train-and-test-cases)
+   :test-cases (second mirror-image-train-and-test-cases)
    :sub-training-cases '()
    :atom-generators mirror-image-atom-generators
    :max-points 1200

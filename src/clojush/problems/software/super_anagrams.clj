@@ -195,6 +195,7 @@
   {:error-function (make-super-anagrams-error-function-from-cases (first super-anagrams-train-and-test-cases)
                                                                   (second super-anagrams-train-and-test-cases))
    :training-cases (first super-anagrams-train-and-test-cases)
+   :test-cases (second super-anagrams-train-and-test-cases)
    :atom-generators super-anagrams-atom-generators
    :max-points 3200
    :max-genome-size-in-initial-program 400

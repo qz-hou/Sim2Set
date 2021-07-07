@@ -135,6 +135,7 @@
   {:error-function (make-sum-of-squares-error-function-from-cases (first sum-of-squares-train-and-test-cases)
                                                                   (second sum-of-squares-train-and-test-cases))
    :training-cases (first sum-of-squares-train-and-test-cases)
+   :test-case (second sum-of-squares-train-and-test-cases)
    :atom-generators sum-of-squares-atom-generators
    :max-points 1600
    :max-genome-size-in-initial-program 200

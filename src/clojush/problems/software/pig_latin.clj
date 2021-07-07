@@ -167,6 +167,7 @@
   {:error-function (make-pig-latin-error-function-from-cases (first pig-latin-train-and-test-cases)
                                                              (second pig-latin-train-and-test-cases))
    :training-cases (first pig-latin-train-and-test-cases)
+   :test-cases (second pig-latin-train-and-test-cases)
    :atom-generators pig-latin-atom-generators
    :max-points 4000
    :max-genome-size-in-initial-program 500

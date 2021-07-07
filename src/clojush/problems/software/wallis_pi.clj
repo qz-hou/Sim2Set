@@ -157,6 +157,7 @@
   {:error-function (make-wallis-pi-error-function-from-cases (first wallis-pi-train-and-test-cases)
                                                              (second wallis-pi-train-and-test-cases))
    :training-cases (first wallis-pi-train-and-test-cases)
+   :test-cases (second wallis-pi-train-and-test-cases)
    :atom-generators wallis-pi-atom-generators
    :max-points 2400
    :max-genome-size-in-initial-program 300

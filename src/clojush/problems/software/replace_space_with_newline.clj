@@ -186,6 +186,7 @@
 (def argmap
   {:error-function replace-space-with-newline-error-function
    :training-cases (first replace-space-with-newline-train-and-test-cases)
+   :test-cases (second replace-space-with-newline-train-and-test-cases)
    :sub-training-cases '()
    :atom-generators replace-space-with-newline-atom-generators
    :max-points 3200

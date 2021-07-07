@@ -144,6 +144,7 @@
   {:error-function (make-smallest-error-function-from-cases (first smallest-train-and-test-cases)
                                                             (second smallest-train-and-test-cases))
    :training-cases (first smallest-train-and-test-cases)
+   :test-cases (second smallest-train-and-test-cases)
    :sub-training-cases '()
    :atom-generators smallest-atom-generators
    :max-points 800

@@ -152,6 +152,7 @@
   {:error-function (make-vector-average-error-function-from-cases (first vector-average-train-and-test-cases)
                                                                   (second vector-average-train-and-test-cases))
    :training-cases (first vector-average-train-and-test-cases)
+   :test-cases (second vector-average-train-and-test-cases)
    :sub-training-cases '()
    :atom-generators vector-average-atom-generators
    :max-points 1600

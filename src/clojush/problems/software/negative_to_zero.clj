@@ -157,6 +157,7 @@
   {:error-function (make-negative-to-zero-error-function-from-cases (first negative-to-zero-train-and-test-cases)
                                                             (second negative-to-zero-train-and-test-cases))
    :training-cases (first negative-to-zero-train-and-test-cases)
+   :test-cases (second negative-to-zero-train-and-test-cases)
    :sub-training-cases '()
    :atom-generators negative-to-zero-atom-generators
    :max-points 2000

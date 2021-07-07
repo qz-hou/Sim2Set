@@ -151,6 +151,7 @@
   {:error-function (make-string-lengths-backwards-error-function-from-cases (first string-lengths-backwards-train-and-test-cases)
                                                                             (second string-lengths-backwards-train-and-test-cases))
    :training-cases (first string-lengths-backwards-train-and-test-cases)
+   :test-cases (second string-lengths-backwards-train-and-test-cases)
    :sub-training-cases '()
    :atom-generators string-lengths-atom-generators
    :max-points 1200

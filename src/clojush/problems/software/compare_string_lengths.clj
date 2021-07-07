@@ -147,6 +147,7 @@
   {:error-function (make-compare-string-lengths-error-function-from-cases (first compare-string-lengths-train-and-test-cases)
                                                                           (second compare-string-lengths-train-and-test-cases))
    :training-cases (first compare-string-lengths-train-and-test-cases)
+   :test-cases (second compare-string-lengths-train-and-test-cases)
    :sub-training-cases '()
    :atom-generators csl-atom-generators
    :max-points 1600

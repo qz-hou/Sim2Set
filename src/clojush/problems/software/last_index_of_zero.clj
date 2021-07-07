@@ -157,6 +157,7 @@
   {:error-function (make-last-index-of-zero-error-function-from-cases (first last-index-of-zero-train-and-test-cases)
                                                                       (second last-index-of-zero-train-and-test-cases))
    :training-cases (first last-index-of-zero-train-and-test-cases)
+   :test-cases (second last-index-of-zero-train-and-test-cases)
    :sub-training-cases '()
    :atom-generators last-index-of-zero-atom-generators
    :max-points 1200

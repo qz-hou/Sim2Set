@@ -230,7 +230,8 @@
         (let [new-genome (apply-simplification-step-to-genome genome simplification-step-probabilities)
               new-program (translate-plush-genome-to-push-program {:genome new-genome}
                                                                   {:max-points (* 10 (count genome))})
-              new-errors (:errors (error-function {:program new-program}))]
+              cases (list (rand-nth test-cases) (rand-nth test-cases))
+              new-errors (:errors (error-function {:program new-program} cases))]
           (if (and (= new-errors errors)
                    (<= (count-points new-program) (count-points program)))
             (recur (inc step) new-genome new-program new-errors)

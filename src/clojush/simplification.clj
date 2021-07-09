@@ -4,6 +4,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; auto-simplification
 
+
 (defn remove-paren-pair
   "Removes one random pair of parens from a program. Cannot remove outermost pair."
   [program]
@@ -171,15 +172,21 @@
                                                   (map vector silent-values (range))))
                                      '())
         indices-to-silence (choose-random-k-without-replacement silencings indices-available-to-silence)
+        curr indices-to-silence
         indices-to-unsilence (choose-random-k-without-replacement unsilencings indices-available-to-unsilence)
         indices-to-no-op (choose-random-k-without-replacement no-opings indices-available-to-no-op)]
     ; Order of changes is: unsilence -> no-op -> silence
     ; This makes it so silencings take highest priority.
+    (def curr-ret 
+      (map #(get genome %) curr))
+    (def ret-set 
+      (set curr-ret))
     (-> genome
       vec      ; Needs to be a vector for change-silent-at-indices
       (change-silent-at-indices indices-to-unsilence false)
       (change-silent-at-indices indices-to-no-op :no-op)
-      (change-silent-at-indices indices-to-silence true))))
+      (change-silent-at-indices indices-to-silence true))
+    (vector ret-set genome)))
 
 (defn auto-simplify-plush
   "Automatically simplifies the genome of an individual without changing its error vector on
@@ -192,8 +199,8 @@
      :silence - number of unsilenced or no-op genes to set :silent = true
      :unsilence - number of silenced or no-op genes to set :silent = false
      :no-op - number of unsilenced or silenced genes to set :silent = :no-op"
-  ([ind error-function steps print-progress-interval]
-    (auto-simplify-plush ind error-function steps print-progress-interval
+  ([ind error-function test-cases steps print-progress-interval]
+    (auto-simplify-plush ind error-function test-cases steps print-progress-interval
                          {{:silence 1} 0.5
                           {:silence 2} 0.3
                           {:silence 3} 0.1
@@ -203,7 +210,7 @@
                           ;{:silence 3 :unsilence 1} 0.05  ;Not used by default
                           ;{:no-op 1} 0.05                 ;Not used by default
                           }))
-  ([ind error-function steps print-progress-interval simplification-step-probabilities]
+  ([ind error-function test-cases steps print-progress-interval simplification-step-probabilities]
     (when (not (zero? print-progress-interval))
       (printf "\nAuto-simplifying Plush genome with starting size: %s" (count (:genome ind))))
     (loop [step 0
@@ -225,14 +232,20 @@
         (println "genome size:" (count genome))
         (println "program size:" (count-points program)))
       (if (>= step steps)
-        (make-individual :genome genome :program program :errors errors :total-error (apply + errors)
-                         :history (:history ind) :genetic-operators :simplification)
-        (let [new-genome (apply-simplification-step-to-genome genome simplification-step-probabilities)
+        (vector (:passed-set @the-map) (:failed-set @the-map))
+        (let [new-genome (get (apply-simplification-step-to-genome genome simplification-step-probabilities) 1)
+              curr-ele (get (apply-simplification-step-to-genome genome simplification-step-probabilities) 0)
               new-program (translate-plush-genome-to-push-program {:genome new-genome}
                                                                   {:max-points (* 10 (count genome))})
               cases (list (rand-nth test-cases) (rand-nth test-cases))
               new-errors (:errors (error-function {:program new-program} cases))]
           (if (and (= new-errors errors)
                    (<= (count-points new-program) (count-points program)))
-            (recur (inc step) new-genome new-program new-errors)
-            (recur (inc step) genome program errors)))))))
+            (do (if (not (= #{} (:faileded-set @the-map)))
+                  (swap! the-map assoc :faileed-set (clojure.set/union curr-ele (:failed-set @the-map)))
+                  (swap! the-map assoc :failed-set curr-ele))
+                (recur (inc step) new-genome new-program new-errors))
+            (do (if (not (= #{} (:passed-set @the-map)))
+                  (swap! the-map assoc :passed-set (clojure.set/union curr-ele (:passed-set @the-map)))
+                  (swap! the-map assoc :passed-set curr-ele))
+                (recur (inc step) genome program errors))))))))

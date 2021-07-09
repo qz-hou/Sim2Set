@@ -81,6 +81,8 @@
          :training-cases '()
           ;; The list of training cases (inputs and outputs). Used for some parent
           ;; selection methods, such as downsampled lexicase.
+         
+         :test-cases '()
 
          :sub-training-cases '()
           ;; The subsample of the training cases used for downsampled lexicase.
@@ -175,6 +177,9 @@
           ;; The probability, per gene, for additions in the first phase, and deletions in the second
           ;; phase (calculated for size-neutrality), of uniform-addition-and-deletion.
 
+         :add-instruction-from-other-rate 0.01
+         
+         
          :uniform-combination-rate 0.01
           ;; The probability, per gene, for combinations during uniform-combination
 
